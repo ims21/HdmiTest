@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-27 16:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TV (0x00)"
+msgstr ""
+
+msgid "Broadcast (0x0f)"
+msgstr ""
+
+msgid "Audio system (0x05)"
+msgstr ""
+
+msgid "Recording device 1 (0x01)"
+msgstr ""
+
+msgid "Recording device 2 (0x02)"
+msgstr ""
+
+msgid "STB1 (0x03)"
+msgstr ""
+
+msgid "DVD1 (0x04)"
+msgstr ""
+
+msgid "STB2 (0x06)"
+msgstr ""
+
+msgid "STB3 (0x07)"
+msgstr ""
+
+msgid "DVD2 (0x08)"
+msgstr ""
+
+msgid "Recording device 3 (0x09))"
+msgstr ""
+
+msgid "Reserved (0x0a))"
+msgstr ""
+
+msgid "Reserved (0x0b))"
+msgstr ""
+
+msgid "Reserved (0x0c))"
+msgstr ""
+
+msgid "Reserved (0x0d))"
+msgstr ""
+
+msgid "Free (0x0e))"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Disable numeric hotkeys"
+msgstr ""
+
+msgid "Disable all hotkeys"
+msgstr ""
+
+msgid "Disable HDMI-CEC plugin"
+msgstr ""
+
+msgid "Disable HDMI-CEC plugin and Num"
+msgstr ""
+
+msgid "Disable all"
+msgstr ""
+
+msgid "HdmiTest"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Monitor"
+msgstr ""
+
+msgid "Wakeup TV"
+msgstr ""
+
+msgid "Tx:"
+msgstr ""
+
+msgid "Rx:"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Real physical address"
+msgstr ""
+
+msgid "HH"
+msgstr ""
+
+msgid "HL"
+msgstr ""
+
+msgid "LH"
+msgstr ""
+
+msgid "LL"
+msgstr ""
+
+msgid "Addressed to"
+msgstr ""
+
+msgid "HdmiTest - Received"
+msgstr ""
+
+msgid "Standby TV"
+msgstr ""
+
+msgid "HdmiTest - options"
+msgstr ""
+
+msgid "Test mode"
+msgstr ""
+
+msgid "Special settings"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Testing HDMI-CEC"
+msgstr ""
