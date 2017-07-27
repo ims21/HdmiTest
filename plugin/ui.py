@@ -4,7 +4,7 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.41"
+VERSION = "0.42"
 #    by ims (c)2012-2017
 #
 #    This program is free software; you can redistribute it and/or
@@ -21,10 +21,9 @@ VERSION = "0.41"
 
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.config import *
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigSelectionNumber, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, getDesktop
 from enigma import eHdmiCEC
 import struct
