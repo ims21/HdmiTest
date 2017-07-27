@@ -125,7 +125,7 @@ msgstr ""
 msgid "Addressed to"
 msgstr ""
 
-msgid "HdmiTest - Received"
+msgid "HdmiTest - received"
 msgstr ""
 
 msgid "Standby TV"
@@ -143,5 +143,5 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-msgid "Testing HDMI-CEC"
+msgid "Monitoring and testing HDMI-CEC"
 msgstr ""

@@ -455,7 +455,7 @@ class HdmiTestInfoScreen(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setup_title = _("HdmiTest - Received")
+		self.setup_title = _("HdmiTest - received")
 		self.line = 0
 		self['rxtext']=Label()
 

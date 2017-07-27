@@ -27,5 +27,5 @@ def main(session,**kwargs):
 
 def Plugins(**kwargs):
 	name = "HdmiTest"
-	descr = _("Testing HDMI-CEC")
+	descr = _("Monitoring and testing HDMI-CEC")
 	return PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_PLUGINMENU, icon = 'plugin.png', fnc=main)
