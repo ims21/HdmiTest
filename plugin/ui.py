@@ -179,7 +179,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		<ePixmap pixmap="skin_default/buttons/key_menu.png" alphatest="on" position="568,10" size="35,25" />
 
 		<widget name="config" position="10,40" size="620,150" zPosition="1" itemHeight="30" font="Regular;25" scrollbarMode="showOnDemand"/>
-		<widget name="help" position="10,230" size="620,20" zPosition="1" font="Regular;16" halign="left" foregroundColor="#005e5e5e"/>
+		<widget name="help" position="10,200" size="620,60" zPosition="1" font="Regular;16" halign="left" foregroundColor="#005e5e5e"/>
 		<widget name="address" position="10,262" size="310,25" zPosition="1" font="Regular;20" foregroundColor="blue"/>
 		<widget name="sendto" position="320,262" size="310,25" zPosition="1" font="Regular;20" foregroundColor="blue"/>
 
@@ -229,7 +229,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		self["key_yellow"] = Label(_("Monitor"))
 		self["key_blue"] = Label(_("Wakeup TV"))
 
-		self["help"] = Label(_("'5' Clear, '0/1' Standby/WakeUp, '7/9' Source active/inactive"))
+		self["help"] = Label(_("'0/1'\tStandby/WakeUp\n'5'\tClear\n'7/9'\tSource active/inactive"))
 		self["ltx"] = Label(_("Tx:"))
 		self["lrx"] = Label(_("Rx:"))
 
