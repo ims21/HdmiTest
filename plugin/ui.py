@@ -178,7 +178,8 @@ class HdmiTest(Screen, ConfigListScreen):
 
 		<ePixmap pixmap="skin_default/buttons/key_menu.png" alphatest="on" position="568,10" size="35,25" />
 
-		<widget name="config" position="10,40" size="620,210" zPosition="1" itemHeight="30" font="Regular;25" scrollbarMode="showOnDemand"/>
+		<widget name="config" position="10,40" size="620,150" zPosition="1" itemHeight="30" font="Regular;25" scrollbarMode="showOnDemand"/>
+		<widget name="help" position="10,230" size="620,20" zPosition="1" font="Regular;16" halign="left" foregroundColor="#005e5e5e"/>
 		<widget name="address" position="10,262" size="310,25" zPosition="1" font="Regular;20" foregroundColor="blue"/>
 		<widget name="sendto" position="320,262" size="310,25" zPosition="1" font="Regular;20" foregroundColor="blue"/>
 
@@ -217,6 +218,7 @@ class HdmiTest(Screen, ConfigListScreen):
 				"yellow": self.rxMonitor,
 				"0":self.standbyN,
 				"1":self.wakeupN,
+				"5":self.clear,
 				"7":self.active_sourceN,
 				"9":self.inactive_sourceN,
 				"menu": self.options,
@@ -227,6 +229,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		self["key_yellow"] = Label(_("Monitor"))
 		self["key_blue"] = Label(_("Wakeup TV"))
 
+		self["help"] = Label(_("'5' Clear, '0/1' Standby/WakeUp, '7/9' Source active/inactive"))
 		self["ltx"] = Label(_("Tx:"))
 		self["lrx"] = Label(_("Rx:"))
 
@@ -325,6 +328,12 @@ class HdmiTest(Screen, ConfigListScreen):
 		if cfg.special.value in["0","1","3","4"]:
 			data = self.address2data()
 			eHdmiCEC.getInstance().sendMessage(0x00, 0x9d, data, len(data))
+
+	def clear(self):
+		self.txline = 0
+		self.rxline = 0
+		self['txtext'].setText("")
+		self['rxtext'].setText("")
 
 	def send(self):
 		if self.txline > 4:
@@ -548,8 +557,6 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 				"ok": self.save,
 				"red": self.cancel,
 				"green": self.save,
-				#"yellow": hdmiTest.standby,
-				#"blue": hdmiTest.wakeup,
 			}, -2)
 
 		self["key_red"] = Label(_("Cancel"))
