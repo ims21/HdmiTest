@@ -3,7 +3,7 @@ import setup_translate
 
 pkg = 'Extensions.HdmiTest'
 setup (name = 'enigma2-plugin-extensions-hdmitest',
-       version = '0.43',
+       version = '0.44',
        description = 'plugin for monitoring and testing HDMI-CEC',
        packages = [pkg],
        package_dir = {pkg: 'plugin'},

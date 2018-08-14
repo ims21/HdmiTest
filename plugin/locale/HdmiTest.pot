@@ -143,5 +143,8 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+msgid "Command history in main screen"
+msgstr ""
+
 msgid "Monitoring and testing HDMI-CEC"
 msgstr ""

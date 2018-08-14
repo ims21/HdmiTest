@@ -4,7 +4,7 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.43"
+VERSION = "0.44"
 #    by ims (c)2012-2018
 #
 #    This program is free software; you can redistribute it and/or
@@ -90,6 +90,7 @@ config.plugins.HdmiTest.hh = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth
 config.plugins.HdmiTest.hl = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
 config.plugins.HdmiTest.lh = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
 config.plugins.HdmiTest.ll = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
+config.plugins.HdmiTest.history = ConfigYesNo(default = False)
 config.plugins.HdmiTest.testmode = ConfigYesNo(default = False)
 config.plugins.HdmiTest.special = ConfigSelection(default="0",choices=[
 	("0",_("None")),
@@ -336,9 +337,11 @@ class HdmiTest(Screen, ConfigListScreen):
 		self['rxtext'].setText("")
 
 	def send(self):
-		if self.txline > 4:
-			self['txtext'].setText(self['txtext'].getText()[:self['txtext'].getText().rstrip("\n").rfind("\n")])
-
+		if cfg.history.value:
+			if self.txline > 4:
+				self['txtext'].setText(self['txtext'].getText()[:self['txtext'].getText().rstrip("\n").rfind("\n")])
+		else:
+			self.clear()
 		data = ''
 		cmd = int(cfg.cmd.value, 0x10)
 
@@ -361,9 +364,11 @@ class HdmiTest(Screen, ConfigListScreen):
 
 		address = self.setAddressTo()
 
-		self["txtext"].setText(self.txText(cmd, address, data) + "\n" + self["txtext"].getText())
-		self.txline += 1
-
+		if cfg.history.value:
+			self["txtext"].setText(self.txText(cmd, address, data) + "\n" + self["txtext"].getText())
+			self.txline += 1
+		else:
+			self["txtext"].setText(self.txText(cmd, address, data))
 		eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
 
 	def address2data(self, full=False):
@@ -548,6 +553,7 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 		self.HdmiTestOptionsList = []
 		self.HdmiTestOptionsList.append(getConfigListEntry(_("Test mode"), cfg.testmode))
 		self.HdmiTestOptionsList.append(getConfigListEntry(_("Special settings"), cfg.special))
+		self.HdmiTestOptionsList.append(getConfigListEntry(_("Command history in main screen"), cfg.history))
 
 		ConfigListScreen.__init__(self, self.HdmiTestOptionsList, session = session)
 
