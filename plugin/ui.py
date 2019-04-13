@@ -281,7 +281,7 @@ class HdmiTest(Screen, ConfigListScreen):
 	def getCurrentValue(self):
 		return str(self["config"].getCurrent()[1].getText())
 	def getCurrentTxText(self):
-		return self["txtext"].getText()
+		return self["txtext"].getText()[:-5]
 	def getCurrentRxText(self):
 		return self["rxtext"].getText()
 	def getCurrentAddress(self):
@@ -579,13 +579,14 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setup_title = _("HdmiTest - options")
-		
+		self.onChangedEntry = []
+
 		self.HdmiTestOptionsList = []
 		self.HdmiTestOptionsList.append(getConfigListEntry(_("Test mode"), cfg.testmode))
 		self.HdmiTestOptionsList.append(getConfigListEntry(_("Special settings"), cfg.special))
 		self.HdmiTestOptionsList.append(getConfigListEntry(_("Command history in main screen"), cfg.history))
 
-		ConfigListScreen.__init__(self, self.HdmiTestOptionsList, session = session)
+		ConfigListScreen.__init__(self, self.HdmiTestOptionsList, session = session, on_change = self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
@@ -597,6 +598,16 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("OK"))
+
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+	def createSummary(self):
+		return HdmiTestOptionsSummary
 
 	def cancel(self):
 		self.close()
@@ -611,7 +622,7 @@ class HdmiTestSummary(Screen):
 		<widget source="entry" render="Label" position="2,30" size="218,18" font="FdLcD;16" halign="left" foregroundColor="#8080ff"/>
 		<widget source="value" render="Label" position="2,48" size="218,32" font="FdLcD;14" halign="center"/>
 		<widget source="address" render="Label" position="2,80" size="218,14" font="FdLcD;14" halign="left" foregroundColor="#b0b000"/>
-		<ePixmap pixmap="PLi-FullHD/border/smallshadowline.png" position="0,95" size="220,2" zPosition="2"/>
+		<ePixmap pixmap="skin_default/div-h.png" position="0,95" size="220,2" zPosition="2"/>
 		<widget source="txtext" render="Label" position="2,98" size="108,78" zPosition="1" font="FdLcD;14" halign="left" noWrap="1" foregroundColor="#a0ffa0"/>
 		<widget source="rxtext" render="Label" position="110,98" size="108,78" zPosition="1" font="FdLcD;14" halign="left" noWrap="1" foregroundColor="#ffa0a0"/>
 	</screen>"""
@@ -669,3 +680,34 @@ class HdmiTestInfoSummary(Screen):
 
 	def selectionChanged(self):
 		self["rxtext"].text = self.parent.getCurrentRxText()
+
+class HdmiTestOptionsSummary(Screen):
+	skin = """
+	<screen name="HdmiTestOptionsSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,26" font="FdLcD;24" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="entry" render="Label" position="2,30" size="218,18" font="FdLcD;16" halign="left" foregroundColor="#8080ff"/>
+		<widget source="value" render="Label" position="2,48" size="218,32" font="FdLcD;14" halign="center"/>
+	</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["Title"] = StaticText(_(parent.setup_title))
+		self["entry"] = StaticText("")
+		self["value"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.append(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
+			self.selectionChanged()
+
+	def removeWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.remove(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
+
+	def selectionChanged(self):
+		self["entry"].text = self.parent.getCurrentEntry() + ":"
+		self["value"].text = self.parent.getCurrentValue()
