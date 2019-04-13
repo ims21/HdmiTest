@@ -4,8 +4,8 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.44"
-#    by ims (c)2012-2018
+VERSION = "0.45"
+#    by ims (c)2012-2019
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 config.plugins.HdmiTest = ConfigSubsection()
-config.plugins.HdmiTest.cmd = ConfigSelection(default = "0x82", choices = [
+config.plugins.HdmiTest.cmd = ConfigSelection(default = "0x8f", choices = [
 	("0x04", "0x04 - Image View On"),
 	("0x0D", "0x0d - Text View On"),
 	("0x36", "0x36 - Standby"),
@@ -70,21 +70,21 @@ config.plugins.HdmiTest.cmd = ConfigSelection(default = "0x82", choices = [
 config.plugins.HdmiTest.realphysicaladdress = ConfigYesNo(default = True)
 config.plugins.HdmiTest.broadcast = ConfigSelection(default = "0x00", choices=[
 		("0x00",_("TV (0x00)")),
-		("0x0f",_("Broadcast (0x0f)")),
-		("0x05",_("Audio system (0x05)")),
 		("0x01",_("Recording device 1 (0x01)")),
 		("0x02",_("Recording device 2 (0x02)")),
 		("0x03",_("STB1 (0x03)")),
 		("0x04",_("DVD1 (0x04)")),
+		("0x05",_("Audio system (0x05)")),
 		("0x06",_("STB2 (0x06)")),
 		("0x07",_("STB3 (0x07)")),
 		("0x08",_("DVD2 (0x08)")),
 		("0x09",_("Recording device 3 (0x09))")),
-		("0x0a",_("Reserved (0x0a))")),
-		("0x0b",_("Reserved (0x0b))")),
+		("0x0a",_("STB4 (0x0a))")),
+		("0x0b",_("DVD3 (0x0b))")),
 		("0x0c",_("Reserved (0x0c))")),
 		("0x0d",_("Reserved (0x0d))")),
-		("0x0e",_("Free (0x0e))"))
+		("0x0e",_("Specific Use (0x0e))")),
+		("0x0f",_("Broadcast (0x0f)"))
 	])
 config.plugins.HdmiTest.hh = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
 config.plugins.HdmiTest.hl = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
