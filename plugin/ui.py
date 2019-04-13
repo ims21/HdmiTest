@@ -4,7 +4,7 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.45"
+VERSION = "0.46"
 #    by ims (c)2012-2019
 #
 #    This program is free software; you can redistribute it and/or
@@ -28,6 +28,7 @@ from enigma import eTimer, getDesktop
 from enigma import eHdmiCEC
 import struct
 import os
+from Components.Sources.StaticText import StaticText
 
 HD = False
 if getDesktop(0).size().width() >= 1280:
@@ -164,6 +165,7 @@ BB  = [0x70, 0x81, 0x82, 0x86, 0x9d]
 BBB = [0x84]
 TXT = [0x32, 0x47]
 
+
 class HdmiTest(Screen, ConfigListScreen):
 	skin = """
 	<screen name="HdmiTest" position="center,center" size="640,400" title="HdmiTest" >
@@ -271,6 +273,21 @@ class HdmiTest(Screen, ConfigListScreen):
 			self.refreshMenu()
 		if self["config"].getCurrentIndex() == 2 or not cfg.realphysicaladdress.value and self["config"].getCurrentIndex() == 6:
 			self['sendto'].setText("Send to address: 0x%x" % (self.setAddressTo()))
+		for x in self.onChangedEntry:
+			x()
+	# for summary:
+	def getCurrentEntry(self):
+		return self["config"].getCurrent()[0]
+	def getCurrentValue(self):
+		return str(self["config"].getCurrent()[1].getText())
+	def getCurrentTxText(self):
+		return self["txtext"].getText()
+	def getCurrentRxText(self):
+		return self["rxtext"].getText()
+	def getCurrentAddress(self):
+		return "Send to address: 0x%x" % (self.setAddressTo())
+	def createSummary(self):
+		return HdmiTestSummary
 
 	def refreshMenu(self):
 		self.mainMenu()
@@ -370,6 +387,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		else:
 			self["txtext"].setText(self.txText(cmd, address, data))
 		eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
+		self.changedEntry()
 
 	def address2data(self, full=False):
 		if cfg.realphysicaladdress.value:
@@ -392,6 +410,7 @@ class HdmiTest(Screen, ConfigListScreen):
 			self['rxtext'].setText(self['rxtext'].getText()[:self['rxtext'].getText().rstrip("\n").rfind("\n")])
 		self["rxtext"].setText(self.rxText(cmd, data, length) + "\n" + self["rxtext"].getText())
 		self.rxline += 1
+		self.changedEntry()
 
 	def txText(self, cmd, address, data):
 		txt = "%02X" % (cmd)
@@ -448,7 +467,7 @@ class HdmiTest(Screen, ConfigListScreen):
 	def afterOption(self, answer=False):
 		self.setHdmiCec()
 		self.refreshMenu()
-		
+
 hdmiTest = HdmiTest(Screen)
 
 class HdmiTestInfoScreen(Screen):
@@ -472,6 +491,8 @@ class HdmiTestInfoScreen(Screen):
 		self.setup_title = _("HdmiTest - received")
 		self.line = 0
 		self['rxtext']=Label()
+
+		self.onChangedEntry = []
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "NumberActions"],
 			{
@@ -520,6 +541,15 @@ class HdmiTestInfoScreen(Screen):
 			opcode +=  "\t"
 		self["rxtext"].setText("%02d %s%s%s%s%s" % (self.line+1,opcode,"\t",hdmiTest.rxText(cmd, data, length),"\n",self["rxtext"].getText()))
 		self.line += 1
+		self.changedEntry()
+
+	def changedEntry(self):
+		for x in self.onChangedEntry:
+			x()
+	def getCurrentRxText(self):
+		return self["rxtext"].getText().replace('\t',' ')
+	def createSummary(self):
+		return HdmiTestInfoSummary
 
 	def clear(self):
 		self["key_green"].setText("")
@@ -573,3 +603,69 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 
 	def save(self):
 		self.keySave()
+
+class HdmiTestSummary(Screen):
+	skin = """
+	<screen name="HdmiTestSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,26" font="FdLcD;24" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="entry" render="Label" position="2,30" size="218,18" font="FdLcD;16" halign="left" foregroundColor="#8080ff"/>
+		<widget source="value" render="Label" position="2,48" size="218,32" font="FdLcD;14" halign="center"/>
+		<widget source="address" render="Label" position="2,80" size="218,14" font="FdLcD;14" halign="left" foregroundColor="#b0b000"/>
+		<ePixmap pixmap="PLi-FullHD/border/smallshadowline.png" position="0,95" size="220,2" zPosition="2"/>
+		<widget source="txtext" render="Label" position="2,98" size="108,78" zPosition="1" font="FdLcD;14" halign="left" noWrap="1" foregroundColor="#a0ffa0"/>
+		<widget source="rxtext" render="Label" position="110,98" size="108,78" zPosition="1" font="FdLcD;14" halign="left" noWrap="1" foregroundColor="#ffa0a0"/>
+	</screen>"""
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["Title"] = StaticText(_(parent.setup_title))
+		self["entry"] = StaticText("")
+		self["value"] = StaticText("")
+		self["address"] = StaticText("")
+		self["txtext"] = StaticText("")
+		self["rxtext"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.append(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
+			self.selectionChanged()
+
+	def removeWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.remove(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
+
+	def selectionChanged(self):
+		self["entry"].text = self.parent.getCurrentEntry() + ":"
+		self["value"].text = self.parent.getCurrentValue()
+		self["address"].text = self.parent.getCurrentAddress()
+		self["txtext"].text = self.parent.getCurrentTxText()
+		self["rxtext"].text = self.parent.getCurrentRxText()
+
+class HdmiTestInfoSummary(Screen):
+	skin = """
+	<screen name="HdmiTestInfoSummary" position="0,0" size="220,176">
+		<widget source="parent.Title" render="Label" position="0,4" size="220,24" font="FdLcD;20" halign="center" noWrap="1" foregroundColor="#ffff00"/>
+		<widget source="rxtext" render="Label" position="2,30" size="216,146" zPosition="1" font="FdLcD;14" halign="left"/>
+	</screen>"""
+
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent = parent)
+		self["Title"] = StaticText(_(parent.setup_title))
+		self["rxtext"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.append(self.selectionChanged)
+			self.selectionChanged()
+
+	def removeWatcher(self):
+		if hasattr(self.parent,"onChangedEntry"):
+			self.parent.onChangedEntry.remove(self.selectionChanged)
+
+	def selectionChanged(self):
+		self["rxtext"].text = self.parent.getCurrentRxText()
