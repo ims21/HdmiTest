@@ -4,7 +4,7 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.46"
+VERSION = "0.47"
 #    by ims (c)2012-2019
 #
 #    This program is free software; you can redistribute it and/or
@@ -73,14 +73,14 @@ config.plugins.HdmiTest.broadcast = ConfigSelection(default = "0x00", choices=[
 		("0x00",_("TV (0x00)")),
 		("0x01",_("Recording device 1 (0x01)")),
 		("0x02",_("Recording device 2 (0x02)")),
-		("0x03",_("STB1 (0x03)")),
+		("0x03",_("Tuner1 (0x03)")),
 		("0x04",_("DVD1 (0x04)")),
 		("0x05",_("Audio system (0x05)")),
-		("0x06",_("STB2 (0x06)")),
-		("0x07",_("STB3 (0x07)")),
+		("0x06",_("Tuner2 (0x06)")),
+		("0x07",_("Tuner3 (0x07)")),
 		("0x08",_("DVD2 (0x08)")),
 		("0x09",_("Recording device 3 (0x09))")),
-		("0x0a",_("STB4 (0x0a))")),
+		("0x0a",_("Tuner4 (0x0a))")),
 		("0x0b",_("DVD3 (0x0b))")),
 		("0x0c",_("Reserved (0x0c))")),
 		("0x0d",_("Reserved (0x0d))")),
