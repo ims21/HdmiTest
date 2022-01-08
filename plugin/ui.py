@@ -528,7 +528,7 @@ class HdmiTestInfoScreen(Screen):
 		data = 16 * '\x00'
 		length = message.getData(data, len(data))
 		opcode = ""
-		if opCode.has_key(cmd):
+		if cmd in opCode:
 			if cmd == 0 and length == 0:
 				opcode = opCode[cmd]
 			elif cmd == 0:
