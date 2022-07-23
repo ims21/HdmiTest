@@ -22,7 +22,7 @@ from . import _
 from Plugins.Plugin import PluginDescriptor
 
 def main(session,**kwargs):
-	import ui
+	from . import ui
 	session.open(ui.HdmiTest)
 
 def Plugins(**kwargs):
