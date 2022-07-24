@@ -167,6 +167,9 @@ TXT = [0x32, 0x47]
 
 
 class HdmiTest(Screen, ConfigListScreen):
+
+	instance = None
+
 	skin = """
 	<screen name="HdmiTest" position="center,center" size="640,400" title="HdmiTest" >
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
