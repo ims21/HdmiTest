@@ -474,6 +474,9 @@ class HdmiTest(Screen, ConfigListScreen):
 hdmiTest = HdmiTest(Screen)
 
 class HdmiTestInfoScreen(Screen):
+
+	instance = None
+
 	skin = """
 	<screen name="HdmiTest - incomming messages" position="center,center" size="560,505" title="HdmiTest - incomming messages" >
 		<ePixmap name="red"    position="0,0"   zPosition="2" size="140,40" pixmap="skin_default/buttons/red.png" transparent="1" alphatest="on" />
