@@ -4,8 +4,8 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.47"
-#    by ims (c)2012-2019
+VERSION = "0.48"
+#    by ims (c)2012-2023
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -260,22 +260,22 @@ class HdmiTest(Screen, ConfigListScreen):
 		self.HdmiTestMenuList.append(getConfigListEntry(_("Real physical address"), cfg.realphysicaladdress))
 		if cfg.realphysicaladdress.value:
 			hexstring = '%04x' % eHdmiCEC.getInstance().getPhysicalAddress()
-			self['address'].setText("Physical Address: " + hexstring[0] + '.' + hexstring[1] + '.' + hexstring[2] + '.' + hexstring[3])
+			self['address'].setText(_("Physical address:") + " " + hexstring[0] + '.' + hexstring[1] + '.' + hexstring[2] + '.' + hexstring[3])
 		else:
 			self.HdmiTestMenuList.append(getConfigListEntry(_("HH"), cfg.hh))
 			self.HdmiTestMenuList.append(getConfigListEntry(_("HL"), cfg.hl))
 			self.HdmiTestMenuList.append(getConfigListEntry(_("LH"), cfg.lh))
 			self.HdmiTestMenuList.append(getConfigListEntry(_("LL"), cfg.ll))
-			self['address'].setText("Physical address: %x.%x.%x.%x" % (int(cfg.hh.value), int(cfg.hl.value), int(cfg.lh.value), int(cfg.ll.value)))
+			self['address'].setText(_("Physical address:") + " " + "%x.%x.%x.%x" % (int(cfg.hh.value), int(cfg.hl.value), int(cfg.lh.value), int(cfg.ll.value)))
 		if cfg.testmode.value or int(cfg.cmd.value[:4], 0x10) in BOTH or int(cfg.cmd.value[:4], 0x10) not in BROADCAST:
 			self.HdmiTestMenuList.append(getConfigListEntry(_("Addressed to"), cfg.broadcast))
-		self['sendto'].setText("Send to address: 0x%x" % (self.setAddressTo()))
+		self['sendto'].setText(_("Send to address:") + " " + "0x%x" % self.setAddressTo())
 
 	def changedEntry(self):
 		if self["config"].getCurrentIndex() in[0,1] or not cfg.realphysicaladdress.value and self["config"].getCurrentIndex() in[1,2,3,4,5]:
 			self.refreshMenu()
 		if self["config"].getCurrentIndex() == 2 or not cfg.realphysicaladdress.value and self["config"].getCurrentIndex() == 6:
-			self['sendto'].setText("Send to address: 0x%x" % (self.setAddressTo()))
+			self['sendto'].setText(_("Send to address:") + " " + "0x%x" % self.setAddressTo())
 		for x in self.onChangedEntry:
 			x()
 	# for summary:
@@ -288,7 +288,7 @@ class HdmiTest(Screen, ConfigListScreen):
 	def getCurrentRxText(self):
 		return self["rxtext"].getText()
 	def getCurrentAddress(self):
-		return "Send to address: 0x%x" % (self.setAddressTo())
+		return _("Send to address:") + " " + "0x%x" % self.setAddressTo()
 	def createSummary(self):
 		return HdmiTestSummary
 
@@ -585,6 +585,8 @@ class HdmiTestOptions(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setup_title = _("HdmiTest - options")
+		self.setTitle(self.setup_title)
+
 		self.onChangedEntry = []
 
 		self.HdmiTestOptionsList = []

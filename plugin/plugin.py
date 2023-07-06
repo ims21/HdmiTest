@@ -5,7 +5,7 @@ from . import _
 #    HdmiTest plugin for OpenPLi-Enigma2
 #
 #
-#    by ims (c)2012-2018
+#    by ims (c)2012-2023
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License

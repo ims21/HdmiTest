@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: HdmiTest\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-27 16:01+0200\n"
+"POT-Creation-Date: 2023-07-06 14:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: IMS <ims@openpli.org>\n"
 "Language-Team: PLi <ims21@users.sourceforge.net>\n"
@@ -14,134 +14,196 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Poedit 3.3.2\n"
 
-msgid "TV (0x00)"
+#: ../ui.py:238
+msgid ""
+"'0/1'\tStandby/WakeUp\n"
+"'5'\tClear\n"
+"'7/9'\tSource active/inactive"
 msgstr ""
+"'0/1'\tStandby/WakeUp\n"
+"'5'\tClear\n"
+"'7/9'\tSource active/inactive"
 
-msgid "Broadcast (0x0f)"
-msgstr ""
-
-msgid "Audio system (0x05)"
-msgstr ""
-
-msgid "Recording device 1 (0x01)"
-msgstr ""
-
-msgid "Recording device 2 (0x02)"
-msgstr ""
-
-msgid "STB1 (0x03)"
-msgstr ""
-
-msgid "DVD1 (0x04)"
-msgstr ""
-
-msgid "STB2 (0x06)"
-msgstr ""
-
-msgid "STB3 (0x07)"
-msgstr ""
-
-msgid "DVD2 (0x08)"
-msgstr ""
-
-msgid "Recording device 3 (0x09))"
-msgstr ""
-
-msgid "Reserved (0x0a))"
-msgstr "Rezervováno (0x0a))"
-
-msgid "Reserved (0x0b))"
-msgstr "Rezervováno (0x0b))"
-
-msgid "Reserved (0x0c))"
-msgstr "Rezervováno (0x0c))"
-
-msgid "Reserved (0x0d))"
-msgstr "Rezervováno (0x0d))"
-
-msgid "Free (0x0e))"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Disable numeric hotkeys"
-msgstr "Zakázat číselné zkratky"
-
-msgid "Disable all hotkeys"
-msgstr "Zakázat všechny hotkeys"
-
-msgid "Disable HDMI-CEC plugin"
-msgstr "Zakázat HDMI-CEC plugin"
-
-msgid "Disable HDMI-CEC plugin and Num"
-msgstr "Zakázat HDMI-CEC plugin a číselné zkratky"
-
-msgid "Disable all"
-msgstr "Zakázat vše"
-
-msgid "HdmiTest"
-msgstr ""
-
-msgid "Send"
-msgstr "Odeslat"
-
-msgid "Cancel"
-msgstr "Zavřít"
-
-msgid "Monitor"
-msgstr ""
-
-msgid "Wakeup TV"
-msgstr "Probudit TV"
-
-msgid "Tx:"
-msgstr ""
-
-msgid "Rx:"
-msgstr ""
-
-msgid "Command"
-msgstr "Příkaz"
-
-msgid "Real physical address"
-msgstr "Skutečná fyzická adresa"
-
-msgid "HH"
-msgstr ""
-
-msgid "HL"
-msgstr ""
-
-msgid "LH"
-msgstr ""
-
-msgid "LL"
-msgstr ""
-
+#: ../ui.py:271
 msgid "Addressed to"
 msgstr "Adresováno pro"
 
-msgid "HdmiTest - received"
-msgstr "HdmiTest - přijato"
-
-msgid "Standby TV"
+#: ../ui.py:78
+msgid "Audio system (0x05)"
 msgstr ""
 
-msgid "HdmiTest - options"
-msgstr "HdmiTest - možnosti"
-
-msgid "Test mode"
-msgstr "Testovací režim"
-
-msgid "Special settings"
-msgstr "Speciální nastavení"
-
-msgid "OK"
+#: ../ui.py:88
+msgid "Broadcast (0x0f)"
 msgstr ""
 
+#: ../ui.py:234 ../ui.py:516 ../ui.py:605
+msgid "Cancel"
+msgstr "Zavřít"
+
+#: ../ui.py:259
+msgid "Command"
+msgstr "Příkaz"
+
+#: ../ui.py:593
 msgid "Command history in main screen"
 msgstr "Historie příkazů na hlavní obrazovce"
 
+#: ../ui.py:100
+msgid "Disable HDMI-CEC plugin"
+msgstr "Zakázat HDMI-CEC plugin"
+
+#: ../ui.py:101
+msgid "Disable HDMI-CEC plugin and Num"
+msgstr "Zakázat HDMI-CEC plugin a číselné zkratky"
+
+#: ../ui.py:102
+msgid "Disable all"
+msgstr "Zakázat vše"
+
+#: ../ui.py:99
+msgid "Disable all hotkeys"
+msgstr "Zakázat všechny hotkeys"
+
+#: ../ui.py:98
+msgid "Disable numeric hotkeys"
+msgstr "Zakázat číselné zkratky"
+
+#: ../ui.py:265
+msgid "HH"
+msgstr ""
+
+#: ../ui.py:266
+msgid "HL"
+msgstr ""
+
+#: ../ui.py:202
+msgid "HdmiTest"
+msgstr ""
+
+#: ../ui.py:587
+msgid "HdmiTest - options"
+msgstr "HdmiTest - možnosti"
+
+#: ../ui.py:497
+msgid "HdmiTest - received"
+msgstr "HdmiTest - přijato"
+
+#: ../ui.py:267
+msgid "LH"
+msgstr ""
+
+#: ../ui.py:268
+msgid "LL"
+msgstr ""
+
+#: ../ui.py:235
+msgid "Monitor"
+msgstr ""
+
+#: ../plugin.py:30
 msgid "Monitoring and testing HDMI-CEC"
 msgstr "Monitorování a tstování HDMI-CEC"
+
+#: ../ui.py:97
+msgid "None"
+msgstr "Žádné"
+
+#: ../ui.py:606
+msgid "OK"
+msgstr ""
+
+#: ../ui.py:263 ../ui.py:269
+msgid "Physical address:"
+msgstr "Fyzická adresa:"
+
+#: ../ui.py:77
+msgid "Playback Device 1 (0x04)"
+msgstr ""
+
+#: ../ui.py:81
+msgid "Playback Device 2 (0x08)"
+msgstr ""
+
+#: ../ui.py:84
+msgid "Playback Device 3 (0x0b))"
+msgstr ""
+
+#: ../ui.py:260
+msgid "Real physical address"
+msgstr "Skutečná fyzická adresa"
+
+#: ../ui.py:74
+msgid "Recording Device 1 (0x01)"
+msgstr ""
+
+#: ../ui.py:75
+msgid "Recording Device 2 (0x02)"
+msgstr ""
+
+#: ../ui.py:82
+msgid "Recording Device 3 (0x09))"
+msgstr ""
+
+#: ../ui.py:85
+msgid "Reserved (0x0c))"
+msgstr "Rezervováno (0x0c))"
+
+#: ../ui.py:86
+msgid "Reserved (0x0d))"
+msgstr "Rezervováno (0x0d))"
+
+#: ../ui.py:240
+msgid "Rx:"
+msgstr ""
+
+#: ../ui.py:233
+msgid "Send"
+msgstr "Odeslat"
+
+#: ../ui.py:272 ../ui.py:278 ../ui.py:291
+msgid "Send to address:"
+msgstr "Odeslat na adresu:"
+
+#: ../ui.py:592
+msgid "Special settings"
+msgstr "Speciální nastavení"
+
+#: ../ui.py:87
+msgid "Specific Use (0x0e))"
+msgstr ""
+
+#: ../ui.py:518
+msgid "Standby TV"
+msgstr ""
+
+#: ../ui.py:73
+msgid "TV (0x00)"
+msgstr ""
+
+#: ../ui.py:591
+msgid "Test mode"
+msgstr "Testovací režim"
+
+#: ../ui.py:76
+msgid "Tuner 1 (0x03)"
+msgstr ""
+
+#: ../ui.py:79
+msgid "Tuner 2 (0x06)"
+msgstr ""
+
+#: ../ui.py:80
+msgid "Tuner 3 (0x07)"
+msgstr ""
+
+#: ../ui.py:83
+msgid "Tuner 4 (0x0a))"
+msgstr ""
+
+#: ../ui.py:239
+msgid "Tx:"
+msgstr ""
+
+#: ../ui.py:236 ../ui.py:519
+msgid "Wakeup TV"
+msgstr "Probudit TV"

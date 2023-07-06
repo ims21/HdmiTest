@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-27 16:01+0200\n"
+"POT-Creation-Date: 2023-07-06 14:44+0200\n"
 "PO-Revision-Date: 2023-07-06 10:04+0200\n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: \n"
@@ -17,134 +17,205 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.2\n"
 
-msgid "TV (0x00)"
-msgstr "TV (0x00)"
+#: ../ui.py:238
+msgid ""
+"'0/1'\tStandby/WakeUp\n"
+"'5'\tClear\n"
+"'7/9'\tSource active/inactive"
+msgstr ""
 
-msgid "Broadcast (0x0f)"
-msgstr "Zenden (0x0f)"
-
-msgid "Audio system (0x05)"
-msgstr "Geluidssysteem (0x05)"
-
-msgid "Recording device 1 (0x01)"
-msgstr "Opname-apparaat 1 (0x01)"
-
-msgid "Recording device 2 (0x02)"
-msgstr "Opname-apparaat 2 (0x02)"
-
-msgid "STB1 (0x03)"
-msgstr "STB 1 (0x03)"
-
-msgid "DVD1 (0x04)"
-msgstr "DVD 1 (0x04)"
-
-msgid "STB2 (0x06)"
-msgstr "STB 2 (0x06)"
-
-msgid "STB3 (0x07)"
-msgstr "STB 3 (0x07)"
-
-msgid "DVD2 (0x08)"
-msgstr "DVD 2 (0x08)"
-
-msgid "Recording device 3 (0x09))"
-msgstr "Opname-apparaat 3 (0x09)"
-
-msgid "Reserved (0x0a))"
-msgstr "Gereserveerd (0x0a))"
-
-msgid "Reserved (0x0b))"
-msgstr "Gereserveerd (0x0b))"
-
-msgid "Reserved (0x0c))"
-msgstr "Gereserveerd (0x0c))"
-
-msgid "Reserved (0x0d))"
-msgstr "Gereserveerd (0x0d))"
-
-msgid "Free (0x0e))"
-msgstr "Beschikbaar (0x0e))"
-
-msgid "None"
-msgstr "Geen"
-
-msgid "Disable numeric hotkeys"
-msgstr "Déactiveer de numerieke hotkeys"
-
-msgid "Disable all hotkeys"
-msgstr "Déactiveer alle hotkeys"
-
-msgid "Disable HDMI-CEC plugin"
-msgstr "Déactiveer de HDMI-CEC plug-in"
-
-msgid "Disable HDMI-CEC plugin and Num"
-msgstr "Déactiveer de HDMI-CEC plug-in en Num"
-
-msgid "Disable all"
-msgstr "Déactiveer alles"
-
-msgid "HdmiTest"
-msgstr "HdmiTest"
-
-msgid "Send"
-msgstr "Zend"
-
-msgid "Cancel"
-msgstr "Annuleer"
-
-msgid "Monitor"
-msgstr "Monitor"
-
-msgid "Wakeup TV"
-msgstr "Start de TV op"
-
-msgid "Tx:"
-msgstr "Tx:"
-
-msgid "Rx:"
-msgstr "Rx:"
-
-msgid "Command"
-msgstr "Commando"
-
-msgid "Real physical address"
-msgstr "Echte fysieke adres"
-
-msgid "HH"
-msgstr "HH"
-
-msgid "HL"
-msgstr "HL"
-
-msgid "LH"
-msgstr "LH"
-
-msgid "LL"
-msgstr "LL"
-
+#: ../ui.py:271
 msgid "Addressed to"
 msgstr "Verstuurd naar"
 
-msgid "HdmiTest - received"
-msgstr "HdmiTest - ontvangen"
+#: ../ui.py:78
+msgid "Audio system (0x05)"
+msgstr "Geluidssysteem (0x05)"
 
-msgid "Standby TV"
-msgstr "Zet de TV naar stand-by"
+#: ../ui.py:88
+msgid "Broadcast (0x0f)"
+msgstr "Zenden (0x0f)"
 
-msgid "HdmiTest - options"
-msgstr "HdmiTest - opties"
+#: ../ui.py:234 ../ui.py:516 ../ui.py:605
+msgid "Cancel"
+msgstr "Annuleer"
 
-msgid "Test mode"
-msgstr "Testmodus"
+#: ../ui.py:259
+msgid "Command"
+msgstr "Commando"
 
-msgid "Special settings"
-msgstr "Bijzondere instellingen"
-
-msgid "OK"
-msgstr "Ok"
-
+#: ../ui.py:593
 msgid "Command history in main screen"
 msgstr "Opdrachtgeschiedenis in het hoofdscherm"
 
+#: ../ui.py:100
+msgid "Disable HDMI-CEC plugin"
+msgstr "Déactiveer de HDMI-CEC plug-in"
+
+#: ../ui.py:101
+msgid "Disable HDMI-CEC plugin and Num"
+msgstr "Déactiveer de HDMI-CEC plug-in en Num"
+
+#: ../ui.py:102
+msgid "Disable all"
+msgstr "Déactiveer alles"
+
+#: ../ui.py:99
+msgid "Disable all hotkeys"
+msgstr "Déactiveer alle hotkeys"
+
+#: ../ui.py:98
+msgid "Disable numeric hotkeys"
+msgstr "Déactiveer de numerieke hotkeys"
+
+#: ../ui.py:265
+msgid "HH"
+msgstr "HH"
+
+#: ../ui.py:266
+msgid "HL"
+msgstr "HL"
+
+#: ../ui.py:202
+msgid "HdmiTest"
+msgstr "HdmiTest"
+
+#: ../ui.py:587
+msgid "HdmiTest - options"
+msgstr "HdmiTest - opties"
+
+#: ../ui.py:497
+msgid "HdmiTest - received"
+msgstr "HdmiTest - ontvangen"
+
+#: ../ui.py:267
+msgid "LH"
+msgstr "LH"
+
+#: ../ui.py:268
+msgid "LL"
+msgstr "LL"
+
+#: ../ui.py:235
+msgid "Monitor"
+msgstr "Monitor"
+
+#: ../plugin.py:30
 msgid "Monitoring and testing HDMI-CEC"
 msgstr "Monitoren & testen HDMI-CEC"
+
+#: ../ui.py:97
+msgid "None"
+msgstr "Geen"
+
+#: ../ui.py:606
+msgid "OK"
+msgstr "Ok"
+
+#: ../ui.py:263 ../ui.py:269
+#, fuzzy
+msgid "Physical address:"
+msgstr "Echte fysieke adres"
+
+#: ../ui.py:77
+#, fuzzy
+msgid "Playback Device 1 (0x04)"
+msgstr "Opname-apparaat 1 (0x01)"
+
+#: ../ui.py:81
+#, fuzzy
+msgid "Playback Device 2 (0x08)"
+msgstr "Opname-apparaat 2 (0x02)"
+
+#: ../ui.py:84
+#, fuzzy
+msgid "Playback Device 3 (0x0b))"
+msgstr "Opname-apparaat 3 (0x09)"
+
+#: ../ui.py:260
+msgid "Real physical address"
+msgstr "Echte fysieke adres"
+
+#: ../ui.py:74
+#, fuzzy
+msgid "Recording Device 1 (0x01)"
+msgstr "Opname-apparaat 1 (0x01)"
+
+#: ../ui.py:75
+#, fuzzy
+msgid "Recording Device 2 (0x02)"
+msgstr "Opname-apparaat 2 (0x02)"
+
+#: ../ui.py:82
+#, fuzzy
+msgid "Recording Device 3 (0x09))"
+msgstr "Opname-apparaat 3 (0x09)"
+
+#: ../ui.py:85
+msgid "Reserved (0x0c))"
+msgstr "Gereserveerd (0x0c))"
+
+#: ../ui.py:86
+msgid "Reserved (0x0d))"
+msgstr "Gereserveerd (0x0d))"
+
+#: ../ui.py:240
+msgid "Rx:"
+msgstr "Rx:"
+
+#: ../ui.py:233
+msgid "Send"
+msgstr "Zend"
+
+#: ../ui.py:272 ../ui.py:278 ../ui.py:291
+msgid "Send to address:"
+msgstr ""
+
+#: ../ui.py:592
+msgid "Special settings"
+msgstr "Bijzondere instellingen"
+
+#: ../ui.py:87
+#, fuzzy
+msgid "Specific Use (0x0e))"
+msgstr "Beschikbaar (0x0e))"
+
+#: ../ui.py:518
+msgid "Standby TV"
+msgstr "Zet de TV naar stand-by"
+
+#: ../ui.py:73
+msgid "TV (0x00)"
+msgstr "TV (0x00)"
+
+#: ../ui.py:591
+msgid "Test mode"
+msgstr "Testmodus"
+
+#: ../ui.py:76
+#, fuzzy
+msgid "Tuner 1 (0x03)"
+msgstr "STB 1 (0x03)"
+
+#: ../ui.py:79
+#, fuzzy
+msgid "Tuner 2 (0x06)"
+msgstr "STB 2 (0x06)"
+
+#: ../ui.py:80
+#, fuzzy
+msgid "Tuner 3 (0x07)"
+msgstr "STB 3 (0x07)"
+
+#: ../ui.py:83
+#, fuzzy
+msgid "Tuner 4 (0x0a))"
+msgstr "Gereserveerd (0x0a))"
+
+#: ../ui.py:239
+msgid "Tx:"
+msgstr "Tx:"
+
+#: ../ui.py:236 ../ui.py:519
+msgid "Wakeup TV"
+msgstr "Start de TV op"
