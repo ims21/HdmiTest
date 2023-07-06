@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-27 16:01+0200\n"
+"PO-Revision-Date: 2023-07-06 10:04+0200\n"
+"Last-Translator: Frenske <voorzitter@openpli.org>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "TV (0x00)"
+msgstr "TV (0x00)"
+
+msgid "Broadcast (0x0f)"
+msgstr "Zenden (0x0f)"
+
+msgid "Audio system (0x05)"
+msgstr "Geluidssysteem (0x05)"
+
+msgid "Recording device 1 (0x01)"
+msgstr "Opname-apparaat 1 (0x01)"
+
+msgid "Recording device 2 (0x02)"
+msgstr "Opname-apparaat 2 (0x02)"
+
+msgid "STB1 (0x03)"
+msgstr "STB 1 (0x03)"
+
+msgid "DVD1 (0x04)"
+msgstr "DVD 1 (0x04)"
+
+msgid "STB2 (0x06)"
+msgstr "STB 2 (0x06)"
+
+msgid "STB3 (0x07)"
+msgstr "STB 3 (0x07)"
+
+msgid "DVD2 (0x08)"
+msgstr "DVD 2 (0x08)"
+
+msgid "Recording device 3 (0x09))"
+msgstr "Opname-apparaat 3 (0x09)"
+
+msgid "Reserved (0x0a))"
+msgstr "Gereserveerd (0x0a))"
+
+msgid "Reserved (0x0b))"
+msgstr "Gereserveerd (0x0b))"
+
+msgid "Reserved (0x0c))"
+msgstr "Gereserveerd (0x0c))"
+
+msgid "Reserved (0x0d))"
+msgstr "Gereserveerd (0x0d))"
+
+msgid "Free (0x0e))"
+msgstr "Beschikbaar (0x0e))"
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Disable numeric hotkeys"
+msgstr "Déactiveer de numerieke hotkeys"
+
+msgid "Disable all hotkeys"
+msgstr "Déactiveer alle hotkeys"
+
+msgid "Disable HDMI-CEC plugin"
+msgstr "Déactiveer de HDMI-CEC plug-in"
+
+msgid "Disable HDMI-CEC plugin and Num"
+msgstr "Déactiveer de HDMI-CEC plug-in en Num"
+
+msgid "Disable all"
+msgstr "Déactiveer alles"
+
+msgid "HdmiTest"
+msgstr "HdmiTest"
+
+msgid "Send"
+msgstr "Zend"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Monitor"
+msgstr "Monitor"
+
+msgid "Wakeup TV"
+msgstr "Start de TV op"
+
+msgid "Tx:"
+msgstr "Tx:"
+
+msgid "Rx:"
+msgstr "Rx:"
+
+msgid "Command"
+msgstr "Commando"
+
+msgid "Real physical address"
+msgstr "Echte fysieke adres"
+
+msgid "HH"
+msgstr "HH"
+
+msgid "HL"
+msgstr "HL"
+
+msgid "LH"
+msgstr "LH"
+
+msgid "LL"
+msgstr "LL"
+
+msgid "Addressed to"
+msgstr "Verstuurd naar"
+
+msgid "HdmiTest - received"
+msgstr "HdmiTest - ontvangen"
+
+msgid "Standby TV"
+msgstr "Zet de TV naar stand-by"
+
+msgid "HdmiTest - options"
+msgstr "HdmiTest - opties"
+
+msgid "Test mode"
+msgstr "Testmodus"
+
+msgid "Special settings"
+msgstr "Bijzondere instellingen"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Command history in main screen"
+msgstr "Opdrachtgeschiedenis in het hoofdscherm"
+
+msgid "Monitoring and testing HDMI-CEC"
+msgstr "Monitoren & testen HDMI-CEC"
