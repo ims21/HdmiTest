@@ -4,8 +4,8 @@ from . import _
 #
 #    HdmiTest plugin for OpenPLi-Enigma2
 #    version:
-VERSION = "0.48"
-#    by ims (c)2012-2023
+VERSION = "0.50"
+#    by ims (c)2012-2026
 #
 #    This program is free software; you can redistribute it and/or
 #    modify it under the terms of the GNU General Public License
@@ -24,15 +24,11 @@ from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigSelectionNumber, getConfigListEntry
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from enigma import eTimer, getDesktop
 from enigma import eHdmiCEC
 import struct
 import os
 from Components.Sources.StaticText import StaticText
 
-HD = False
-if getDesktop(0).size().width() >= 1280:
-	HD = True
 
 config.plugins.HdmiTest = ConfigSubsection()
 config.plugins.HdmiTest.cmd = ConfigSelection(default = "0x8f", choices = [
@@ -79,12 +75,12 @@ config.plugins.HdmiTest.broadcast = ConfigSelection(default = "0x00", choices=[
 		("0x06",_("Tuner 2 (0x06)")),
 		("0x07",_("Tuner 3 (0x07)")),
 		("0x08",_("Playback Device 2 (0x08)")),
-		("0x09",_("Recording Device 3 (0x09))")),
-		("0x0a",_("Tuner 4 (0x0a))")),
-		("0x0b",_("Playback Device 3 (0x0b))")),
-		("0x0c",_("Reserved (0x0c))")),
-		("0x0d",_("Reserved (0x0d))")),
-		("0x0e",_("Specific Use (0x0e))")),
+		("0x09",_("Recording Device 3 (0x09)")),
+		("0x0a",_("Tuner 4 (0x0a)")),
+		("0x0b",_("Playback Device 3 (0x0b)")),
+		("0x0c",_("Reserved (0x0c)")),
+		("0x0d",_("Reserved (0x0d)")),
+		("0x0e",_("Specific Use (0x0e)")),
 		("0x0f",_("Broadcast (0x0f)"))
 	])
 config.plugins.HdmiTest.hh = ConfigSelectionNumber(min = 0, max = 0xf, stepwidth = 1, default = 0, wraparound = True)
@@ -112,6 +108,8 @@ opCode = {
 	0x0d:"<Text View On>",
 	0x32:"<Set Menu Language>",
 	0x36:"<Standby>",
+	0x44:"<User Control Pressed>",
+	0x45:"<User Control Released>",
 	0x46:"<Give OSD Name>",
 	0x47:"<Set OSD Name>",
 	0x70:"<System Mode Audio Request>",
@@ -134,12 +132,17 @@ opCode = {
 	0x8e:"<Menu Status>",
 	0x8f:"<Give Device Power Status>",
 	0x90:"<Report Power Status>",
-	0x91:"<Give Device Power Status>",
-	0x9e:"<CEC Version>",
+	0x91:"<Get Menu Language>",
 	0x9d:"<Inactive Source>",
 	0x9e:"<CEC Version>",
 	0x9f:"<Get CEC Version>",
 	}
+# returned user control codes:
+userControl = {
+	0x6b:"<Power Toggle Function>",
+	0x6c:"<Power Off Function>",
+	0x6d:"<Power On Function>",
+}
 # returned abort codes:
 abortReason = {
 	0x00:"Unrecognized opcode",
@@ -203,10 +206,11 @@ class HdmiTest(Screen, ConfigListScreen):
 
 		self.HDMICEC = None
 		for routine in eHdmiCEC.getInstance().messageReceived.get():
-			if str(routine).find("Components.HdmiCec.HdmiCec"):
+			if "Components.HdmiCec.HdmiCec" in str(routine):
 				index = eHdmiCEC.getInstance().messageReceived.get().index(routine)
 				self.HDMICEC = eHdmiCEC.getInstance().messageReceived.get().pop(index)
 				self.activateHdmiCec()
+				break
 		
 		self['address'] = Label()
 		self['sendto'] = Label()
@@ -218,7 +222,6 @@ class HdmiTest(Screen, ConfigListScreen):
 			{
 				"cancel": self.quit,
 				"green": self.send,
-				"ok": self.send,
 				"red": self.quit,
 				"blue": self.wakeup,
 				"yellow": self.rxMonitor,
@@ -297,7 +300,8 @@ class HdmiTest(Screen, ConfigListScreen):
 		self["config"].setList(self.HdmiTestMenuList)
 
 	def setAddressTo(self):
-		if int(cfg.cmd.value[:4], 0x10) in BROADCAST and not cfg.testmode.value:
+		cmd = int(cfg.cmd.value[:4], 0x10)
+		if cmd in BROADCAST and cmd not in BOTH and not cfg.testmode.value:
 			return 0xf
 		return int(cfg.broadcast.value, 0x10)
 
@@ -315,10 +319,11 @@ class HdmiTest(Screen, ConfigListScreen):
 			eHdmiCEC.getInstance().messageReceived.get().pop(idx)
 
 	def activateHdmiCec(self):
-		eHdmiCEC.getInstance().messageReceived.get().append(self.HDMICEC)
+		if self.HDMICEC is not None:
+			eHdmiCEC.getInstance().messageReceived.get().append(self.HDMICEC)
 
 	def queryHdmiCec(self):
-		if eHdmiCEC.getInstance().messageReceived.get().count(self.HDMICEC):
+		if self.HDMICEC is not None and eHdmiCEC.getInstance().messageReceived.get().count(self.HDMICEC):
 			return eHdmiCEC.getInstance().messageReceived.get().index(self.HDMICEC)
 		return None
 
@@ -373,13 +378,13 @@ class HdmiTest(Screen, ConfigListScreen):
 			data = os.uname()[1]
 			data = data[:14]
 		elif cmd in[0x720, 0x721, 0x7e0, 0x7e1, 0x8e0, 0x8e1]:
-			data = str(struct.pack('B', cmd&0x1))
+			data = struct.pack('B', cmd&0x1).decode("ISO-8859-1")
 			cmd >>= 4
 		elif cmd in[0x7a0, 0x7a1]:
-			data = str(struct.pack('B', (cmd&0x1)<<7))
+			data = struct.pack('B', (cmd&0x1)<<7).decode("ISO-8859-1")
 			cmd >>= 4
 		elif cmd in[0x8d0, 0x8d1, 0x8d2]:
-			data = str(struct.pack('B', cmd&0x3))
+			data = struct.pack('B', cmd&0x3).decode("ISO-8859-1")
 			cmd >>= 4
 
 		address = self.setAddressTo()
@@ -402,8 +407,8 @@ class HdmiTest(Screen, ConfigListScreen):
 
 		if full:
 			devicetype = eHdmiCEC.getInstance().getDeviceType()
-			return str(struct.pack('BBB', hi, lo, devicetype))
-		return str(struct.pack('BB', hi, lo))
+			return struct.pack('BBB', hi, lo, devicetype).decode("ISO-8859-1")
+		return struct.pack('BB', hi, lo).decode("ISO-8859-1")
 
 	def messageReceived(self, message):
 		cmd = message.getCommand()
@@ -432,7 +437,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		if cmd == 0 and length == 0:
 			return " - "
 		if cmd == 0x00:
-			return "%02X" % ord(data[0]) + " " + abortReason[ord(data[1])]
+			return "%02X" % ord(data[0]) + " " + abortReason.get(ord(data[1]), "Unknown")
 		txt = "%02X" % (cmd)
 		if cmd in TXT:
 			txt +=  " "
@@ -440,9 +445,12 @@ class HdmiTest(Screen, ConfigListScreen):
 			if cmd in TXT:
 				txt += "%s" % data[i]
 			elif cmd == 0x90:
-				txt += " " + "%02X" % ord(data[i]) + " " + powerStatus[ord(data[i])]
+				value = ord(data[i])
+				txt += " " + "%02X" % value + " " + powerStatus.get(value, "(Unknown)")
 			elif cmd == 0x9e:
-				txt += " " + "%02X" % ord(data[i]) + 3*" " + "(version: %s)" % CecVersion[ord(data[i])]
+				value = ord(data[i])
+				version = CecVersion[value] if value < len(CecVersion) else "unknown"
+				txt += " " + "%02X" % value + 3*" " + "(version: %s)" % version
 			else:
 				txt += " " + "%02X" % ord(data[i])
 		return txt
@@ -454,6 +462,7 @@ class HdmiTest(Screen, ConfigListScreen):
 		# push back Components.HdmiCec to list
 		if self.queryHdmiCec() is None:
 			self.activateHdmiCec()
+		HdmiTest.instance = None
 		self.close()
 
 	def rxMonitor(self):
@@ -539,6 +548,8 @@ class HdmiTestInfoScreen(Screen):
 				opcode = opCode[cmd]
 			elif cmd == 0:
 				opcode = "<Feature Abort>"
+			elif cmd == 0x44 and length > 1 and ord(data[0]) in userControl:
+				opcode = userControl[ord(data[0])]
 			else:
 				opcode = "%s" % opCode[cmd]
 		else:
@@ -558,12 +569,14 @@ class HdmiTestInfoScreen(Screen):
 		return HdmiTestInfoSummary
 
 	def clear(self):
+		self.line = 0
 		self["key_green"].setText("")
 		self["rxtext"].setText("")
 
 	def quit(self):
 		index = eHdmiCEC.getInstance().messageReceived.get().index(self.messageReceivedAll)
 		eHdmiCEC.getInstance().messageReceived.get().pop(index)
+		HdmiTestInfoScreen.instance = None
 		self.close()
 
 class HdmiTestOptions(Screen, ConfigListScreen):
